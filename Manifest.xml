@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="MailApp">
+
+  <!-- Begin basic settings: Add-in metadata used for all versions of Outlook, unless override provided. -->
+
+  <!-- IMPORTANT: The ID must be unique to your add-in. If you reuse this manifest, ensure that you change this to a new GUID. -->
+  <Id>971E76EF-D73E-567F-ADAE-5A76B39352C8</Id>
+  <!-- Updates from the Office Store only get triggered if there is a version change. -->
+  <Version>1.0.0.0</Version>
+  <ProviderName>Contoso</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <!-- The display name of your add-in. Used in the in-app Office Store and various places of the Outlook UI, such as an add-in's dialog. -->
+  <DisplayName DefaultValue="Contoso Add-in"/>
+  <Description DefaultValue="An Outlook add-in template to get started."/>
+  <!-- Change the following lines to specify the web server that hosts the icon files. -->
+  <IconUrl DefaultValue="https://65fb3034c9fa880b9818b7e0--ephemeral-dodol-89bbc4.netlify.app/assets/Capture2.png"/>
+  <HighResolutionIconUrl DefaultValue="https://65fb3034c9fa880b9818b7e0--ephemeral-dodol-89bbc4.netlify.app/assets/Capture2.png"/>
+  <!-- Domains allowed for navigation. -->
+
+
+  <!--End basic settings. -->
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <!-- The <Requirements> element is overridden by any <Requirements> element inside a <VersionOverrides> element. -->
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <!-- The <FormSettings> element is required for validation, but is ignored when there's a <VersionOverrides> element in your manifest. -->
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <!-- Change the following line to specify the web server that hosts the HTML file. -->
+        <SourceLocation DefaultValue="https://65fb3034c9fa880b9818b7e0--ephemeral-dodol-89bbc4.netlify.app/"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <!-- The <Rule> element is required for validation, but is ignored when there's a <VersionOverrides> element in your manifest. -->
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.13">
+          <bt:Set Name="Mailbox"/>
+        </bt:Sets>
+      </Requirements>
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <DesktopFormFactor>
+            <!-- Location of the functions that will run when the add-in's function command is selected. -->
+            <FunctionFile resid="functionFile"/>
+            <!-- Activates the add-in on the Message Read surface. -->
+            <ExtensionPoint xsi:type="MessageReadCommandSurface">
+              <!-- Use the default tab of the ExtensionPoint or create your own with <CustomTab id="myTab">. -->
+              <OfficeTab id="TabDefault">
+                <!-- Add up to six groups per tab. -->
+                <Group id="msgReadGroup">
+                  <Label resid="groupLabel"/>
+                  <!-- Configures the button to launch the add-in's task pane. -->
+                  <Control xsi:type="Button" id="msgReadOpenPaneButton">
+                    <Label resid="taskPaneButtonLabel"/>
+                    <Supertip>
+                      <Title resid="taskPaneButtonLabel"/>
+                      <Description resid="taskPaneButtonDescription"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="icon16"/>
+                      <bt:Image size="32" resid="icon32"/>
+                      <bt:Image size="80" resid="icon80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="messageReadTaskPaneUrl"/>
+                    </Action>
+                  </Control>
+                  <!-- Configures the function command of the add-in. -->
+                  <Control xsi:type="Button" id="msgReadActionButton">
+                    <Label resid="actionButtonLabel"/>
+                    <Supertip>
+                      <Title resid="actionButtonLabel"/>
+                      <Description resid="actionButtonDescription"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="icon16"/>
+                      <bt:Image size="32" resid="icon32"/>
+                      <bt:Image size="80" resid="icon80"/>
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>run</FunctionName>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+      <!-- You can use resources across hosts and form factors. -->
+      <Resources>
+        <bt:Images>
+          <bt:Image id="icon16" DefaultValue="https://contoso.com/assets/icon16.png"/>
+          <bt:Image id="icon32" DefaultValue="https://contoso.com/assets/icon32.png"/>
+          <bt:Image id="icon80" DefaultValue="https://contoso.com/assets/icon80.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="functionFile" DefaultValue="https://contoso.com/FunctionFile.html"/>
+          <bt:Url id="messageReadTaskPaneUrl" DefaultValue="https://contoso.com/MessageRead.html"/>
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="groupLabel" DefaultValue="My Add-in Group"/>
+          <bt:String id="taskPaneButtonLabel" DefaultValue="Show Task Pane"/>
+          <bt:String id="actionButtonLabel" DefaultValue="Perform an Action"/>
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="taskPaneButtonDescription" DefaultValue="Opens a task pane."/>
+          <bt:String id="actionButtonDescription" DefaultValue="Performs an action."/>
+        </bt:LongStrings>
+      </Resources>
+    </VersionOverrides>
+  </VersionOverrides>
+  </OfficeApp>

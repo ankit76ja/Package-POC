@@ -1,0 +1,22 @@
+{
+  "name": "my-library",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^13.3.0",
+    "@angular/core": "^13.3.0",
+    "bootstrap": "^5.0.1"
+
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "bootstrap": "^5.0.1",
+    "@types/office-js": "^1.0.23"
+  }
+}

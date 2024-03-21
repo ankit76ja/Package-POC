@@ -11,18 +11,26 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "my-library": [
+        "dist/my-library/my-library",
+        "dist/my-library"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
-    "module": "es2020",
+    "module": "es2015",
     "lib": [
       "es2020",
       "dom"
     ]
   },
+  "target": "es5",
+  "typeRoots": ["node_modules/@types"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
